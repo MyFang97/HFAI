@@ -1,11 +1,9 @@
 # 百度人脸识别请求接口
 import requests
-import os
-import json
-from app import app, getImgB64
+
+from config import getImgB64
 
 BD_request_url = "https://aip.baidubce.com/rest/2.0/face/v3/detect"
-static_image_url = 'D:\Desktop\HFAI\static'
 
 
 def getBdAccessToken():
@@ -42,9 +40,3 @@ def BDAI_Face(imageUrl, access_token):
 
 
 access_token = getBdAccessToken()
-
-
-@app.route('/api/bdai')
-def hello_world():
-    data = BDAI_Face(os.path.join(static_image_url, 'face.jpg'), access_token)
-    return json.dumps(data)
