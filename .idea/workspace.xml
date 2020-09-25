@@ -26,7 +26,9 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bc7fe6fd-3fc3-4a60-ba1b-f6355caaa14c" name="Default Changelist" comment="修复导包错误" />
+    <list default="true" id="bc7fe6fd-3fc3-4a60-ba1b-f6355caaa14c" name="Default Changelist" comment="修复导包错误">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -49,6 +51,13 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="hiddenUrls">
+      <set>
+        <option value="git@github.com:MyFang97/HFAI.git" />
+      </set>
+    </option>
+  </component>
   <component name="ProjectId" id="1hwIGKJFSCkaxl65AwVJ1mjwXsd" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="false" id="Update" />
@@ -59,14 +68,14 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="ASKED_SHARE_PROJECT_utilsURATION_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="SHARE_PROJECT_utilsURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
   </component>
   <component name="RunManager" selected="Flask server.Flask (app.py)">
-    <configuration name="HFAI" type="PythonConfigurationType" factoryName="Python">
+    <utilsuration name="HFAI" type="PythonutilsurationType" factoryName="Python">
       <module name="HFAI" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -78,7 +87,7 @@
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <EXTENSION ID="PythonCoverageRunutilsurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/app.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
@@ -87,8 +96,8 @@
       <option name="REDIRECT_INPUT" value="false" />
       <option name="INPUT_FILE" value="" />
       <method v="2" />
-    </configuration>
-    <configuration name="Flask (app.py)" type="Python.FlaskServer" temporary="true" nameIsGenerated="true">
+    </utilsuration>
+    <utilsuration name="Flask (app.py)" type="Python.FlaskServer" temporary="true" nameIsGenerated="true">
       <module name="HFAI" />
       <option name="target" value="$PROJECT_DIR$/app.py" />
       <option name="targetType" value="PATH" />
@@ -99,11 +108,11 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <EXTENSION ID="PythonCoverageRunutilsurationExtension" runner="coverage.py" />
       <option name="launchJavascriptDebuger" value="false" />
       <method v="2" />
-    </configuration>
-    <configuration name="HFAI" type="Python.FlaskServer">
+    </utilsuration>
+    <utilsuration name="HFAI" type="Python.FlaskServer">
       <module name="HFAI" />
       <option name="target" value="$PROJECT_DIR$/app.py" />
       <option name="targetType" value="PATH" />
@@ -114,18 +123,18 @@
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <EXTENSION ID="PythonCoverageRunutilsurationExtension" runner="coverage.py" />
       <option name="launchJavascriptDebuger" value="false" />
       <method v="2" />
-    </configuration>
+    </utilsuration>
     <recent_temporary>
       <list>
         <item itemvalue="Flask server.Flask (app.py)" />
       </list>
     </recent_temporary>
   </component>
-  <component name="SvnConfiguration">
-    <configuration />
+  <component name="Svnutilsuration">
+    <utilsuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -136,7 +145,8 @@
       <updated>1600915630020</updated>
       <workItem from="1600915635056" duration="5575000" />
       <workItem from="1600932556391" duration="1634000" />
-      <workItem from="1600936795114" duration="4709000" />
+      <workItem from="1600936795114" duration="5745000" />
+      <workItem from="1600944934796" duration="928000" />
     </task>
     <task id="LOCAL-00001" summary="百度">
       <created>1600939481021</created>
@@ -159,7 +169,14 @@
       <option name="project" value="LOCAL" />
       <updated>1600941970473</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="修复导包错误">
+      <created>1600942282194</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1600942282194</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -189,12 +206,16 @@
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
-  <component name="VcsManagerConfiguration">
+  <component name="VcsManagerutilsuration">
     <MESSAGE value="百度" />
     <MESSAGE value="修复导包错误" />
     <option name="LAST_COMMIT_MESSAGE" value="修复导包错误" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="660" y="278" key="#Notifications" timestamp="1600942384303">
+      <screen x="0" y="0" width="1549" height="831" />
+    </state>
+    <state x="660" y="278" key="#Notifications/0.0.1549.831@0.0.1549.831" timestamp="1600942384303" />
     <state width="1506" height="213" key="GridCell.Tab.0.bottom" timestamp="1600941901936">
       <screen x="0" y="0" width="1549" height="831" />
     </state>

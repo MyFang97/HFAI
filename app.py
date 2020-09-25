@@ -6,14 +6,15 @@ import base64
 import json
 
 from BaiDuAi import BDAI_Face, access_token
-from config import static_image_url
+from utils import static_image_url
 
 app = Flask(__name__)
-
+# app.utils.from_object(utils)
+# app.utils.from_pyfile('utils.py')
 
 @app.route('/')
 def hello_world():
-    print('hi')
+    # print('hi')
     return '欢迎来到我们的世界'
 
 

@@ -1,6 +1,6 @@
 import base64
 
-static_image_url = 'D:\Desktop\HFAI\static'
+static_image_url = '/home/ubuntu/HFAI/static'
 
 
 def getImgB64(imageUrl):

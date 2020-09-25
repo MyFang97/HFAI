@@ -1,7 +1,7 @@
 # 百度人脸识别请求接口
 import requests
 
-from config import getImgB64
+from utils import getImgB64
 
 BD_request_url = "https://aip.baidubce.com/rest/2.0/face/v3/detect"
 
