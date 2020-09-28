@@ -12,10 +12,10 @@ def getBdAccessToken():
     client_id 为官网获取的AK， client_secret 为官网获取的SK
     :return: access_token
     """
-    host = 'https://aip.baidubce.com/oauth/2.0/token?grant_type=client_credentials&client_id=qGadE2QPlgHQnQXawp6PG6DD&client_secret=SGOv81lUOnYKVPiqvXN0yx4evwDOTtpl'
+    host = "https://aip.baidubce.com/oauth/2.0/token?grant_type=client_credentials&client_id=qGadE2QPlgHQnQXawp6PG6DD&client_secret=SGOv81lUOnYKVPiqvXN0yx4evwDOTtpl"
     response = requests.get(host)
     # if response:
-    return response.json()['access_token']
+    return response.json()["access_token"]
 
 
 def BDAI_Face(imageUrl, access_token):
@@ -25,15 +25,17 @@ def BDAI_Face(imageUrl, access_token):
     :param access_token:百度access_token
     :return:
     """
-    params = {'image': getImgB64(imageUrl),
-              'image_type': 'BASE64',
-              'face_field': 'age,beauty,expression,face_shape,gender,glasses,'
-                            'landmark,landmark150,race,quality,eye_status,emotion,'
-                            'face_type,mask,spoofing'}
+    params = {
+        "image": getImgB64(imageUrl),
+        "image_type": "BASE64",
+        "face_field": "age,beauty,expression,face_shape,gender,glasses,"
+        "landmark,landmark150,race,quality,eye_status,emotion,"
+        "face_type,mask,spoofing",
+    }
 
     # access_token = getBdAccessToken()
     request_url = BD_request_url + "?access_token=" + access_token
-    headers = {'content-type': 'application/json'}
+    headers = {"content-type": "application/json"}
     response = requests.post(request_url, data=params, headers=headers)
     if response:
         return response.json()
