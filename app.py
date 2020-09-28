@@ -8,7 +8,7 @@ import json
 from BaiDuAi import BDAI_Face, access_token
 
 app = Flask(__name__)
-static_image_url = '/home/ubuntu/HFAI/static/image'
+static_image_url = '/home/ubuntu/HFAI/static/images'
 
 
 @app.route("/")
