@@ -26,11 +26,11 @@ def BDAI_Face(imageUrl, access_token):
     :return:
     """
     params = {
-        "image": getImgB64(imageUrl),
+        "images": getImgB64(imageUrl),
         "image_type": "BASE64",
         "face_field": "age,beauty,expression,face_shape,gender,glasses,"
-        "landmark,landmark150,race,quality,eye_status,emotion,"
-        "face_type,mask,spoofing",
+                      "landmark,landmark150,race,quality,eye_status,emotion,"
+                      "face_type,mask,spoofing",
     }
 
     # access_token = getBdAccessToken()

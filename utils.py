@@ -1,8 +1,6 @@
 import base64
 
 
-
-
 def getImgB64(imageUrl):
     """
     获取图片base64编码
