@@ -30,7 +30,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BaiDuAi.py" beforeDir="false" afterPath="$PROJECT_DIR$/BaiDuAi.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/image/face.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/images/face.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -96,6 +95,7 @@
       <workItem from="1600936795114" duration="5745000" />
       <workItem from="1600944934796" duration="928000" />
       <workItem from="1601449917799" duration="6773000" />
+      <workItem from="1602209484023" duration="545000" />
     </task>
     <task id="LOCAL-00001" summary="百度">
       <created>1600939481021</created>

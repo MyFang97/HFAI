@@ -31,24 +31,25 @@ def hello_world():
 @app.route("/api/bdai", methods=['POST'])
 def baiDuAi():
     image_path = request.form['image_path']
-    logger.info('image_path:{}'.format(image_path))
+    app.logger.info('image_path:{}'.format(image_path))
     small_image_path = str(image_path).split('.')[0] + '_small' + str(image_path).split('.')[1]
-    logger.info('small_image_path:{}'.format(small_image_path))
-    # res = BDAI_Face(os.path.join(static_image_url, "face.jpg"), access_token)
+    app.logger.info('small_image_path:{}'.format(small_image_path))
     res = BDAI_Face(image_path, access_token)
     logger.info('res:{}'.format(res))
     result = {}
     result["code"] = res["error_code"]  # 状态码
     result["msg"] = res["error_msg"]  # 消息
-    if res["code"] == 0:
+    if result["code"] == 0:
         result['data'] = {}
         result["data"]["face_num"] = res['result']["face_num"]  # 人脸数量
+
         # result["data"]["location"] = res['result']["face_list"][0][
         #     "location"]  # 人脸位置
         # 根据人脸位置获取小图并返回
-        getSmallImage(image_path, small_image_path, res['result']["face_list"][0][
-            "location"])
-        result['data']['small_image_path'] = small_image_path
+        # getSmallImage(image_path, small_image_path, res['result']["face_list"][0][
+        #     "location"])
+        # result['data']['small_image_path'] = small_image_path
+
         result["data"]["age"] = res['result']["face_list"][0]["age"]  # 年龄
         result["data"]["beauty"] = res['result']["face_list"][0][
             "beauty"]  # 颜值
@@ -65,6 +66,7 @@ def baiDuAi():
             "type"]  # 情绪angry:愤怒 disgust:厌恶 fear:恐惧 happy:高兴 sad: 伤心 surprise: 惊讶 neutral: 无情绪
         result["data"]["race"] = res['result']["face_list"][0]["race"][
             "type"]  # 肤色yellow: 黄种人 white: 白种人 black:黑种人 arabs: 阿拉伯人
+    app.logger.info('result:{}'.format(result))
     return json.dumps(result)
 
 
@@ -129,4 +131,4 @@ def upload():
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=9999, debug=False)
+    app.run(host="0.0.0.0", port=9999, debug=True)

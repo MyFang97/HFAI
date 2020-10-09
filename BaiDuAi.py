@@ -1,6 +1,5 @@
 # 百度人脸识别请求接口
 import requests
-
 from utils import getImgB64
 
 BD_request_url = "https://aip.baidubce.com/rest/2.0/face/v3/detect"
@@ -26,7 +25,7 @@ def BDAI_Face(imageUrl, access_token):
     :return:
     """
     params = {
-        "images": getImgB64(imageUrl),
+        "image": getImgB64(imageUrl),
         "image_type": "BASE64",
         "face_field": "age,beauty,expression,face_shape,gender,glasses,"
                       "landmark,landmark150,race,quality,eye_status,emotion,"
