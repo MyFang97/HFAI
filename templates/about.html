@@ -1,0 +1,212 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>about</title>
+
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <style>
+        .img {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 400px;
+            width: 400px;
+            float: left;
+            margin: 20px;
+        }
+
+        #show_img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <div class="img" style="background-color:	silver ;">
+            <img id="show_img" alt="" />
+        </div>
+        <!-- <form action="/api/upload" method="POST" enctype="multipart/form-data"> -->
+        <table width="45%" border="0" cellspacing="0" cellpadding="0">
+
+            <tr>
+                <td width="100" height="30" align="right">人脸：</td>
+                <td height="40"><label for="textfield"></label>
+                    <img id="small_img" alt="" />
+                    <!-- <input name="age" type="text" id="textfield1" size="25" style="border:none"> -->
+                </td>
+            </tr>
+
+            <tr>
+                <td width="100" height="30" align="right">年龄：</td>
+                <td height="40"><label for="textfield"></label>
+                    <!-- <input name="age" type="text" id="textfield1" size="25" style="border:none"></td> -->
+                    <p id="age"></p>
+                </td>
+            </tr>
+
+            <tr>
+                <td width="100" height="30" align="right">颜值：</td>
+                <td height="40"><label for="textfield2"></label>
+                    <!-- <input name="beauty" type="text" id="textfield2" size="25" style="border:none"></td> -->
+                    <p id="beauty"></p>
+                </td>
+            </tr>
+
+            <tr>
+                <td width="100" height="30" align="right">表情：</td>
+                <td height="40"><label for="textfield2"></label>
+                    <!-- <input name="emo" type="text" id="textfield3" size="25" style="border:none"></td> -->
+                    <p id="expression"></p>
+                </td>
+            </tr>
+
+            <tr>
+                <td width="100" height="30" align="right">脸型：</td>
+                <td height="40"><label for="textfield2"></label>
+                    <!-- <input name="square" type="text" id="textfield4" size="25" style="border:none"></td> -->
+                    <p id="face_shape"></p>
+                </td>
+            </tr>
+
+            <tr>
+                <td width="100" height="30" align="right">性别：</td>
+                <td height="40"><label for="textfield2"></label>
+                    <!-- <input name="sex" type="text" id="textfield5" size="25" style="border:none"></td> -->
+                    <p id="gender"></p>
+                </td>
+            </tr>
+
+            <tr>
+                <td width="100" height="30" align="right">眼镜：</td>
+                <td height="40"><label for="textfield2"></label>
+                    <!-- <input name="glasses" type="text" id="textfield6" size="25" style="border:none"></td> -->
+                    <p id="glasses"></p>
+            </tr>
+
+            <tr>
+                <td width="100" height="30" align="right">情绪：</td>
+                <td height="40"><label for="textfield2"></label>
+                    <!-- <input name="emotion" type="text" id="textfield7" size="25" style="border:none"></td> -->
+                    <p id="emotion"></p>
+            </tr>
+
+            <tr>
+                <td width="100" height="30" align="right">肤色：</td>
+                <td height="40"><label for="textfield2"></label>
+                    <!-- <input name="race" type="text" id="textfield8" size="25" style="border:none"></td> -->
+                    <p id="race"></p>
+            </tr>
+
+            <tr>
+                <td width="100" height="30" align="right">选择图片文件</td>
+                <td height="40"><label for="textfield2"></label>
+                    <input name="file" id="img_upload" type="file" accept="image/jpeg,image/png,image/gif,image/bmp" />
+                    <input type="button" onclick="upload()" value="上传" />
+                    <input type=button value=刷新 onclick="location.reload()">
+            </tr>
+            <tr>
+                <td width="100" height="30" align="right"></td>
+                <td height="40"><label for="textfield2"></label>
+                    <p><a href="/index">返回首页</a></p>
+            </tr>
+        </table>
+        <!-- </form> -->
+
+    </div>
+    <script>
+        function upload() {
+            document.getElementById("show_img").src = '';
+            document.getElementById("small_img").src = '';
+            document.getElementById("age").innerText = '';
+            document.getElementById("beauty").innerText = '';
+            document.getElementById("emotion").innerText = '';
+            document.getElementById("expression").innerText = '';
+            document.getElementById("face_shape").innerText = '';
+            document.getElementById("gender").innerText = '';
+            document.getElementById("glasses").innerText = '';
+            document.getElementById("race").innerText = '';
+            var cover = new FormData();
+            var fileObj = document.getElementById('img_upload').files[0];
+            cover.append('file', fileObj)
+            $.ajax({
+                type: 'post',
+                url: '/api/upload',
+                data: cover,
+                async: false,
+                processData: false,
+                contentType: false,
+                success: function (data, status) {
+                    eval("var data = " + data);
+                    if (data.code == 0) {
+                        console.log(data);
+                        console.log(data.data);
+                        document.getElementById("show_img").src = data.data.image_path;
+                        $.ajax({
+                            type: 'post',
+                            url: '/api/bdai_face',
+                            data: data.data,
+                            success: function (data, status) {
+                                eval("var data = " + data);
+                                if (data.code == 0) {
+                                    console.log(data);
+                                    document.getElementById("small_img").src = data.data.small_image_path
+                                    document.getElementById("age").innerText = data.data.age
+                                    document.getElementById("beauty").innerText = data.data.beauty
+                                    document.getElementById("emotion").innerText = data.data.emotion
+                                    document.getElementById("expression").innerText = data.data.expression
+                                    document.getElementById("face_shape").innerText = data.data.face_shape
+                                    document.getElementById("gender").innerText = data.data.gender
+                                    document.getElementById("glasses").innerText = data.data.glasses
+                                    document.getElementById("race").innerText = data.data.race
+
+                                } else {
+                                    console.log(data);
+                                    alert(data.msg);
+                                }
+                            }
+                        });
+                    } else {
+                        alert(data.msg);
+                    }
+                },
+            });
+        };
+    </script>
+
+    <!-- <script>
+        function upload() {
+            var file=$("#img_upload")[0].files[0];
+            console.log(file)
+            if(file==null)
+                return;
+            var formData=new FormData();
+            formData.append('image_path',file);
+            $.ajax({
+                url:"/api/bdai_face",
+                type:'POST',
+                cache:false,
+                data:formData,
+                processData:false,
+                contentType:false,
+                xhrFields: {
+                    withCredentials: true
+                },
+                crossDomain: true,
+                success: function(res){
+                    console.log(res)
+                }
+            });
+        }
+    </script> -->
+
+
+
+
+</body>
+
+</html>
