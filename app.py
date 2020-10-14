@@ -9,6 +9,7 @@ from BaiDuAi import BDAI_Poem
 import time
 import logging
 from flask import render_template
+import base64
 
 app = Flask(__name__, template_folder='templates', static_folder="static")
 
@@ -25,6 +26,10 @@ def hello_world():
 def about():
     return render_template('about.html')
 
+@app.route("/question")
+def question():
+    return render_template('question.html')
+
 
 @app.route("/api/bdai_face", methods=['POST'])
 def baiDuAiFace():
@@ -33,8 +38,9 @@ def baiDuAiFace():
     small_image_path = str(image_path).split('.')[0] + '_' + str(
         time.time())[:8] + '_small.' + str(image_path).split('.')[1]
     logging.info('small_image_path:{}'.format(small_image_path))
+    logging.info('-----开始进入人脸识别----')
     res = BDAI_Face(image_path)
-    # logging.info('res:{}'.format(res))
+    logging.info('res:{}'.format(str(res)[:100]))
     result = {}
     result["code"] = res["error_code"]  # 状态码
     result["msg"] = res["error_msg"]  # 消息
@@ -55,48 +61,55 @@ def baiDuAiFace():
         # 根据人脸位置获取小图并返回
         getSmallImage(image_path, small_image_path, bbox)
         result['data']['small_image_path'] = small_image_path
-        result["data"]["age"] = res['result']["face_list"][0]["age"]  # 年龄
-        result["data"]["beauty"] = res['result']["face_list"][0][
-            "beauty"]  # 颜值
-        brow = {'none': '不笑', 'smile': '微笑', 'laugh': '大笑'}
-        result["data"]["expression"] = brow[res['result']["face_list"][0][
-            "expression"]["type"]]  # 表情none:不笑；smile:微笑；laugh:大笑
-        feature = {
-            'square': '正方形',
-            'triangle': '三角形',
-            'oval': '椭圆',
-            'heart': '心形',
-            'round': '圆形'
-        }
-        result["data"]["face_shape"] = feature[
-            res['result']["face_list"][0]["face_shape"]
-            ["type"]]  # 脸型square: 正方形 triangle:三角形 oval: 椭圆 heart: 心形 round: 圆形
-        gender = {'male': '男性', 'female': '女性'}
-        result["data"]["gender"] = gender[res['result']["face_list"][0][
-            "gender"]["type"]]  # male:男性 female:女性
-        glasses = {'none': '无眼镜', 'common': '普通眼镜', 'sun': '墨镜'}
-        result["data"]["glasses"] = glasses[res['result']["face_list"][0][
-            "glasses"]["type"]]  # none:无眼镜，common:普通眼镜，sun:墨镜
-        emotion = {
-            'angry': '愤怒',
-            'disgust': '厌恶',
-            'fear': '恐惧',
-            'happy': '高兴',
-            'sad': '伤心',
-            'surprise': '惊讶',
-            'neutral': '无情绪'
-        }
-        result["data"]["emotion"] = emotion[
-            res['result']["face_list"][0]["emotion"]
-            ["type"]]  # 情绪angry:愤怒 disgust:厌恶 fear:恐惧 happy:高兴 sad: 伤心 surprise: 惊讶 neutral: 无情绪
-        race = {
-            'yellow': '黄种人',
-            'white': '白种人',
-            'black': '黑种人',
-            'arabs': '阿拉伯人'
-        }
-        result["data"]["race"] = race[res['result']["face_list"][0]["race"][
-            "type"]]  # 肤色yellow: 黄种人 white: 白种人 black:黑种人 arabs: 阿拉伯人
+        try:
+            result["data"]["age"] = res['result']["face_list"][0]["age"]  # 年龄
+            result["data"]["beauty"] = res['result']["face_list"][0][
+                "beauty"]  # 颜值
+            brow = {'none': '不笑', 'smile': '微笑', 'laugh': '大笑'}
+            result["data"]["expression"] = brow[res['result']["face_list"][0][
+                "expression"]["type"]]  # 表情none:不笑；smile:微笑；laugh:大笑
+            feature = {
+                'square': '正方形',
+                'triangle': '三角形',
+                'oval': '椭圆',
+                'heart': '心形',
+                'round': '圆形'
+            }
+            result["data"]["face_shape"] = feature[
+                res['result']["face_list"][0]["face_shape"]
+                ["type"]]  # 脸型square: 正方形 triangle:三角形 oval: 椭圆 heart: 心形 round: 圆形
+            gender = {'male': '男性', 'female': '女性'}
+            result["data"]["gender"] = gender[res['result']["face_list"][0][
+                "gender"]["type"]]  # male:男性 female:女性
+            glasses = {'none': '无眼镜', 'common': '普通眼镜', 'sun': '墨镜'}
+            result["data"]["glasses"] = glasses[res['result']["face_list"][0][
+                "glasses"]["type"]]  # none:无眼镜，common:普通眼镜，sun:墨镜
+            emotion = {
+                'angry': '愤怒',
+                'disgust': '厌恶',
+                'fear': '恐惧',
+                'happy': '高兴',
+                'sad': '伤心',
+                'surprise': '惊讶',
+                'neutral': '无情绪',
+                'grimace':'扮鬼脸'
+            }
+            if res['result']["face_list"][0]["emotion"]["type"] in emotion:
+                result["data"]["emotion"] = emotion[
+                    res['result']["face_list"][0]["emotion"]
+                    ["type"]]  # 情绪angry:愤怒 disgust:厌恶 fear:恐惧 happy:高兴 sad: 伤心 surprise: 惊讶 neutral: 无情绪
+            else:
+                 result["data"]["emotion"] = '未识别到'
+            race = {
+                'yellow': '黄种人',
+                'white': '白种人',
+                'black': '黑种人',
+                'arabs': '阿拉伯人'
+            }
+            result["data"]["race"] = race[res['result']["face_list"][0]["race"][
+                "type"]]  # 肤色yellow: 黄种人 white: 白种人 black:黑种人 arabs: 阿拉伯人
+        except:
+            pass
     logging.info('result:{}'.format(result))
     return json.dumps(result)
 
@@ -170,6 +183,46 @@ def upload():
         # result['data']['show_path'] = show_path
         logging.info('result:{}'.format(result))
         return json.dumps(result)
+
+
+@app.route('/api/b64upload', methods=['POST', 'GET'])
+def b64upload():
+    """
+        调用摄像头时拍照得到的是b64编码
+    """
+    if request.method == 'POST':
+        result = {}
+        try:
+            file = request.form['file']
+        except Exception as e:
+            result['code'] = -1
+            result['msg'] = 'failed:{}'.format(e)
+            return json.dumps(result)
+        logging.info('b64文件--{}'.format(file[:50]))
+        # 去掉文件头
+        b64img = file[22:]
+        # 解码
+        b64img = base64.b64decode(b64img)
+        # 提取文件后缀名
+        img_name = 'camera_'+str(int(time.time())) + '.png'
+        logging.info('img_name:{}'.format(img_name))
+        # 保存逻辑
+        basepath = os.path.dirname(__file__)  # 当前文件所在路径
+        upload_path = os.path.join(basepath, 'static/images', img_name)
+        show_path = os.path.join('static/images', img_name)
+        logging.info('show_path:{}'.format(show_path))
+        img = open(upload_path, 'wb')
+        img.write(b64img)
+        img.close()
+        # file = file[22:]
+        # img = base64.b64decode(file)
+        # img_name = str(int(time.time()))+'.'+file[11:14]
+        # logging.info(img)
+        result['code'] = 0
+        result['msg'] = 'SUCCESS'
+        result['data'] = {'image_path': show_path}
+        return json.dumps(result)
+    # return render_template('new_test.html')
 
 
 if __name__ == "__main__":
