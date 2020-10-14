@@ -1,9 +1,9 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>about</title>
+    <title>人脸识别</title>
 
     <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
     <style>
@@ -22,21 +22,41 @@
             max-height: 100%;
             object-fit: cover;
         }
+
+        #s_img {
+            height: 70px;
+            width: 70px;
+        }
+
+        #small_img {
+            width: 100%;
+            display: block;
+            object-fit: cover;
+        }
     </style>
 </head>
 
 <body>
+
     <div>
+        <div>
+            <h3>人脸识别（可选择上传本地文件或者拍照上传）</h3>
+            <p>建议使用谷歌浏览器打开，其次使用IE浏览器</p>
+            <p>其他浏览器打开遇到问题咱也没法呀</p>
+        </div>
         <div class="img" style="background-color:	silver ;">
             <img id="show_img" alt="" />
         </div>
         <!-- <form action="/api/upload" method="POST" enctype="multipart/form-data"> -->
-        <table width="45%" border="0" cellspacing="0" cellpadding="0">
+        <table width="30%" border="0" cellspacing="0" cellpadding="0">
 
             <tr>
                 <td width="100" height="30" align="right">人脸：</td>
                 <td height="40"><label for="textfield"></label>
-                    <img id="small_img" alt="" />
+                    <div class="small_img" id="s_img" style="background-color:	silver ;">
+                        <img id="small_img" alt="" />
+                    </div>
+                    <!-- <img id="small_img" alt="" /> -->
                     <!-- <input name="age" type="text" id="textfield1" size="25" style="border:none"> -->
                 </td>
             </tr>
@@ -112,24 +132,37 @@
             <tr>
                 <td width="100" height="30" align="right"></td>
                 <td height="40"><label for="textfield2"></label>
-                    <p><a href="/index">返回首页</a></p>
+                    <button onclick="openMedia()">开启摄像头</button>
+                    <button onclick="closeMedia()">关闭摄像头</button>
+                    <button onclick="takePhoto()">拍照</button>
+                    <button onclick="camera_upload()">上传</button>
+
+
             </tr>
+
         </table>
+        <video id="video" width="400px" height="400px" autoplay="autoplay"></video>
+        <canvas id="canvas" width="400px" height="400px"></canvas>
         <!-- </form> -->
 
     </div>
+    <p><a href="/question">谷歌浏览器打不开摄像头请点我</a></p>
+    <p><a href="/index">返回首页</a></p>
+
     <script>
         function upload() {
-            document.getElementById("show_img").src = '';
-            document.getElementById("small_img").src = '';
-            document.getElementById("age").innerText = '';
-            document.getElementById("beauty").innerText = '';
-            document.getElementById("emotion").innerText = '';
-            document.getElementById("expression").innerText = '';
-            document.getElementById("face_shape").innerText = '';
-            document.getElementById("gender").innerText = '';
-            document.getElementById("glasses").innerText = '';
-            document.getElementById("race").innerText = '';
+            clean();
+            document.getElementById("video").src = '';
+            // document.getElementById("show_img").src = '';
+            // document.getElementById("small_img").src = '';
+            // document.getElementById("age").innerText = '';
+            // document.getElementById("beauty").innerText = '';
+            // document.getElementById("emotion").innerText = '';
+            // document.getElementById("expression").innerText = '';
+            // document.getElementById("face_shape").innerText = '';
+            // document.getElementById("gender").innerText = '';
+            // document.getElementById("glasses").innerText = '';
+            // document.getElementById("race").innerText = '';
             var cover = new FormData();
             var fileObj = document.getElementById('img_upload').files[0];
             cover.append('file', fileObj)
@@ -144,7 +177,7 @@
                     eval("var data = " + data);
                     if (data.code == 0) {
                         console.log(data);
-                        console.log(data.data);
+                        console.log('bdai_face上传', data.data);
                         document.getElementById("show_img").src = data.data.image_path;
                         $.ajax({
                             type: 'post',
@@ -176,6 +209,104 @@
                 },
             });
         };
+
+        function openMedia() {
+            let constraints = {
+                video: { width: 500, height: 500 },
+                audio: true
+            };
+            //获得video摄像头
+            let video = document.getElementById('video');
+            let promise = navigator.mediaDevices.getUserMedia(constraints);
+            promise.then((mediaStream) => {
+                mediaStreamTrack = typeof mediaStream.stop === 'function' ? mediaStream : mediaStream.getTracks()[1];
+                video.srcObject = mediaStream;
+                video.play();
+            });
+        }
+
+        // 拍照
+        function takePhoto() {
+            //获得Canvas对象
+            let video = document.getElementById('video');
+            let canvas = document.getElementById('canvas');
+            let ctx = canvas.getContext('2d');
+            ctx.drawImage(video, 0, 0, 400, 400);
+
+            // toDataURL  ---  可传入'image/png'---默认, 'image/jpeg'
+            var img = document.getElementById('canvas').toDataURL();
+            // 这里的img就是得到的图片
+            console.log('img-----', img);
+            // document.getElementById('imgTag').src=img;
+        }
+
+        function camera_upload() {
+            clean();
+            document.getElementById("show_img").src = '';
+            var img = document.getElementById('canvas').toDataURL();
+            console.log('upload的img--', img)
+            // var cover = new FormData();
+            // cover.append('file', img)
+            // console.log('upload的cover--', cover)
+            let cover = { 'file': img }
+            console.log('upload的cover--', cover)
+            $.ajax({
+                type: 'post',
+                url: '/api/b64upload',
+                data: cover,
+                success: function (data, status) {
+                    eval("var data = " + data);
+                    if (data.code == 0) {
+                        console.log('ipload--data:', data);
+                        $.ajax({
+                            type: 'post',
+                            url: '/api/bdai_face',
+                            data: data.data,
+                            success: function (data, status) {
+                                eval("var data = " + data);
+                                if (data.code == 0) {
+                                    console.log(data);
+                                    document.getElementById("small_img").src = data.data.small_image_path
+                                    document.getElementById("age").innerText = data.data.age
+                                    document.getElementById("beauty").innerText = data.data.beauty
+                                    document.getElementById("emotion").innerText = data.data.emotion
+                                    document.getElementById("expression").innerText = data.data.expression
+                                    document.getElementById("face_shape").innerText = data.data.face_shape
+                                    document.getElementById("gender").innerText = data.data.gender
+                                    document.getElementById("glasses").innerText = data.data.glasses
+                                    document.getElementById("race").innerText = data.data.race
+
+                                } else {
+                                    console.log(data);
+                                    alert(data.msg);
+                                }
+                            }
+                        })
+                    } else {
+                        alt(data.msg);
+                    }
+                }
+            })
+        }
+
+        // 关闭摄像头
+        function closeMedia() {
+            mediaStreamTrack.stop();
+        }
+
+        function clean() {
+            // document.getElementById("show_img").src = '';
+            console.log('执行了清除程序')
+            document.getElementById("small_img").src = '';
+            document.getElementById("age").innerText = '';
+            document.getElementById("beauty").innerText = '';
+            document.getElementById("emotion").innerText = '';
+            document.getElementById("expression").innerText = '';
+            document.getElementById("face_shape").innerText = '';
+            document.getElementById("gender").innerText = '';
+            document.getElementById("glasses").innerText = '';
+            document.getElementById("race").innerText = '';
+        }
     </script>
 
     <!-- <script>

@@ -3,6 +3,7 @@ import requests
 from utils import getImgB64
 import logging
 
+
 def getBdAccessToken():
     """
     获取百度AItoken
@@ -42,6 +43,7 @@ def BDAI_Face(imageUrl):
     headers = {"content-type": "application/json"}
     response = requests.post(request_url, data=params, headers=headers)
     if response:
+        # logging.info('人脸识别response:{}'.format(response.json()))
         return response.json()
 
 
@@ -51,12 +53,9 @@ def BDAI_Poem(word):
     word：关键词
     """
     Bd_Poen_request_url = "https://aip.baidubce.com/rpc/2.0/creation/v1/poem"
-    headers = {'Content-Type':'application/json'}
+    headers = {'Content-Type': 'application/json'}
     index = 0
-    params = {
-        'text' : word.encode('utf-8'),
-        'index' : index
-    }
+    params = {'text': word.encode('utf-8'), 'index': index}
     logging.info('params:{}'.format(params))
     request_url = Bd_Poen_request_url + "?access_token=" + access_token
     headers = {"content-type": "application/json"}
@@ -64,4 +63,3 @@ def BDAI_Poem(word):
     if response:
         index += 1
         return response.json()
-    
