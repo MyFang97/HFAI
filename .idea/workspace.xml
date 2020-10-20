@@ -27,10 +27,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bc7fe6fd-3fc3-4a60-ba1b-f6355caaa14c" name="Default Changelist" comment="修复导包错误">
+      <change afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BaiDuAi.py" beforeDir="false" afterPath="$PROJECT_DIR$/BaiDuAi.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,6 +77,58 @@
     <property name="SHARE_PROJECT_utilsURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
   </component>
+  <component name="RunManager" selected="Python.test">
+    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="HFAI" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="update" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="HFAI" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/update.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.test" />
+        <item itemvalue="Python.update" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -96,6 +148,9 @@
       <workItem from="1600944934796" duration="928000" />
       <workItem from="1601449917799" duration="6773000" />
       <workItem from="1602209484023" duration="545000" />
+      <workItem from="1602738582322" duration="8065000" />
+      <workItem from="1602817025466" duration="2690000" />
+      <workItem from="1603187199344" duration="131000" />
     </task>
     <task id="LOCAL-00001" summary="百度">
       <created>1600939481021</created>
@@ -169,22 +224,26 @@
       <screen x="0" y="0" width="1549" height="831" />
     </state>
     <state x="230" y="71" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1549.831@0.0.1549.831" timestamp="1601450031715" />
-    <state width="1506" height="213" key="GridCell.Tab.0.bottom" timestamp="1600941901936">
+    <state x="543" y="216" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1602747688972">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state width="1506" height="213" key="GridCell.Tab.0.bottom/0.0.1549.831@0.0.1549.831" timestamp="1600941901936" />
-    <state width="1506" height="213" key="GridCell.Tab.0.center" timestamp="1600941901936">
+    <state x="543" y="216" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1549.831@0.0.1549.831" timestamp="1602747688972" />
+    <state width="928" height="213" key="GridCell.Tab.0.bottom" timestamp="1602821542074">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state width="1506" height="213" key="GridCell.Tab.0.center/0.0.1549.831@0.0.1549.831" timestamp="1600941901936" />
-    <state width="1506" height="213" key="GridCell.Tab.0.left" timestamp="1600941901936">
+    <state width="928" height="213" key="GridCell.Tab.0.bottom/0.0.1549.831@0.0.1549.831" timestamp="1602821542074" />
+    <state width="928" height="213" key="GridCell.Tab.0.center" timestamp="1602821542074">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state width="1506" height="213" key="GridCell.Tab.0.left/0.0.1549.831@0.0.1549.831" timestamp="1600941901936" />
-    <state width="1506" height="213" key="GridCell.Tab.0.right" timestamp="1600941901936">
+    <state width="928" height="213" key="GridCell.Tab.0.center/0.0.1549.831@0.0.1549.831" timestamp="1602821542074" />
+    <state width="928" height="213" key="GridCell.Tab.0.left" timestamp="1602821542074">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state width="1506" height="213" key="GridCell.Tab.0.right/0.0.1549.831@0.0.1549.831" timestamp="1600941901936" />
+    <state width="928" height="213" key="GridCell.Tab.0.left/0.0.1549.831@0.0.1549.831" timestamp="1602821542074" />
+    <state width="928" height="213" key="GridCell.Tab.0.right" timestamp="1602821542074">
+      <screen x="0" y="0" width="1549" height="831" />
+    </state>
+    <state width="928" height="213" key="GridCell.Tab.0.right/0.0.1549.831@0.0.1549.831" timestamp="1602821542074" />
     <state x="367" y="149" key="Vcs.Push.Dialog.v2" timestamp="1600939701553">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
@@ -196,5 +255,7 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/HFAI$Flask__app_py_.coverage" NAME="Flask (app.py) Coverage Results" MODIFIED="1600941511916" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/HFAI$test.coverage" NAME="test Coverage Results" MODIFIED="1602819893903" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/HFAI$update.coverage" NAME="update Coverage Results" MODIFIED="1602817071231" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

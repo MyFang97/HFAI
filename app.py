@@ -10,8 +10,10 @@ import time
 import logging
 from flask import render_template
 import base64
+import update
 
 app = Flask(__name__, template_folder='templates', static_folder="static")
+
 
 # static_image_url = '/home/ubuntu/HFAI/static/images'
 
@@ -25,6 +27,7 @@ def hello_world():
 @app.route("/about")
 def about():
     return render_template('about.html')
+
 
 @app.route("/question")
 def question():
@@ -92,14 +95,14 @@ def baiDuAiFace():
                 'sad': '伤心',
                 'surprise': '惊讶',
                 'neutral': '无情绪',
-                'grimace':'扮鬼脸'
+                'grimace': '扮鬼脸'
             }
             if res['result']["face_list"][0]["emotion"]["type"] in emotion:
                 result["data"]["emotion"] = emotion[
                     res['result']["face_list"][0]["emotion"]
                     ["type"]]  # 情绪angry:愤怒 disgust:厌恶 fear:恐惧 happy:高兴 sad: 伤心 surprise: 惊讶 neutral: 无情绪
             else:
-                 result["data"]["emotion"] = '未识别到'
+                result["data"]["emotion"] = '未识别到'
             race = {
                 'yellow': '黄种人',
                 'white': '白种人',
@@ -204,7 +207,7 @@ def b64upload():
         # 解码
         b64img = base64.b64decode(b64img)
         # 提取文件后缀名
-        img_name = 'camera_'+str(int(time.time())) + '.png'
+        img_name = 'camera_' + str(int(time.time())) + '.png'
         logging.info('img_name:{}'.format(img_name))
         # 保存逻辑
         basepath = os.path.dirname(__file__)  # 当前文件所在路径
@@ -214,15 +217,68 @@ def b64upload():
         img = open(upload_path, 'wb')
         img.write(b64img)
         img.close()
-        # file = file[22:]
-        # img = base64.b64decode(file)
-        # img_name = str(int(time.time()))+'.'+file[11:14]
-        # logging.info(img)
         result['code'] = 0
         result['msg'] = 'SUCCESS'
         result['data'] = {'image_path': show_path}
         return json.dumps(result)
-    # return render_template('new_test.html')
+
+
+# 多格式上传文件
+@app.route("/upload_data", methods=["POST"])
+def upload_data():
+    result = {}
+    if request.json and "file" in request.json:
+        try:
+            file = request.json['file']
+        except Exception as e:
+            result['code'] = -1
+            result['msg'] = 'failed:{}'.format(e)
+            return json.dumps(result)
+        logging.info('b64文件--{}'.format(file[:50]))
+        # 去掉文件头
+        b64img = file[22:]
+        # 解码
+        b64img = base64.b64decode(b64img)
+        # 提取文件后缀名
+        img_name = 'camera_' + str(int(time.time())) + '.png'
+        logging.info('img_name:{}'.format(img_name))
+        # 保存逻辑
+        basepath = os.path.dirname(__file__)  # 当前文件所在路径
+        upload_path = os.path.join(basepath, 'static/images', img_name)
+        show_path = os.path.join('static/images', img_name)
+        logging.info('show_path:{}'.format(show_path))
+        img = open(upload_path, 'wb')
+        img.write(b64img)
+        img.close()
+        result['code'] = 0
+        result['msg'] = 'SUCCESS'
+        result['data'] = {'image_path': show_path}
+        return json.dumps(result)
+    elif request.files and "input" in request.files:
+        # 传输图片文件
+        f = request.files['file']
+        if not (f and allowed_file(f.filename)):
+            result['code'] = 1001
+            result['msg'] = "请检查上传的图片类型，仅限于png、PNG、jpg、JPG、bmp"
+            return json.dumps(result)
+        logging.info('filename:{}'.format(f.filename))
+        # 处理上传图片位置
+        filename = str(f.filename).split('.')[0] + '_' + str(
+            time.time())[:8] + '.' + str(f.filename).split('.')[1]
+        basepath = os.path.dirname(__file__)  # 当前文件所在路径
+        upload_path = os.path.join(basepath, 'static/images',
+                                   filename)  # 注意：没有的文件夹一定要先创建，不然会提示没有该路径
+        f.save(upload_path)
+        show_path = os.path.join('static/images', filename)
+        logging.info('upload_path:{}'.format(upload_path))
+        result['code'] = 0
+        result['msg'] = 'success'
+        result['data'] = {}
+        result['data']['image_path'] = show_path
+        # result['data']['image_path'] = upload_path
+        # result['data']['show_path'] = show_path
+        logging.info('result:{}'.format(result))
+        return json.dumps(result)
 
 
 if __name__ == "__main__":
